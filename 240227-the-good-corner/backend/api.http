@@ -1,0 +1,69 @@
+GET http://localhost:3000
+
+### 
+
+GET http://localhost:3000/ads
+
+###
+
+GET http://localhost:3000/ads?tag=retro%20gaming
+
+###
+
+POST http://localhost:3000/ads
+Content-Type: application/json
+
+{
+    "title": "Guitar",
+    "description":      "My bike is blue, working fine. I'm selling it because I've got a new one",
+    "owner": "bike.seller@gmail.com",
+    "price": 100,
+    "picture": "https://images.lecho.be/view?iid=dc:113129565&context=ONLINE&ratio=16/9&width=640&u=1508242455000",
+    "location": "Paris",
+    "createdAt": "2023-09-05T10:13:14.755Z",
+    "category": "autres",
+    "tags": ["blue","music","new", "country"]
+}
+
+###
+
+DELETE http://localhost:3000/ads/3
+
+###
+
+PUT http://localhost:3000/ads/4
+Content-Type: application/json
+
+{
+    "title": "Super NES",
+    "description":      "An old console",
+    "owner": "loic@gmail.com",
+    "price": 100,
+    "picture":      "https://images.lecho.be/view?iid=dc:113129565&context=ONLINE&ratio=16/9&width=640&u=1508242455000",
+    "location": "Lille",
+    "createdAt": "2024-02-05T10:13:14.755Z",
+    "category": "vetements",
+    "tags": ["video games", "retro gaming", "pixels !"]
+}
+
+###
+
+PATCH http://localhost:3000/ads/4
+Content-Type: application/json
+
+{
+    "title": "Motorbike to sell",
+    "color":"blue"
+}
+
+###
+
+GET http://localhost:3000/categories
+
+###
+
+GET http://localhost:3000/categories?needle=tu
+
+###
+
+GET http://localhost:3000/tags
