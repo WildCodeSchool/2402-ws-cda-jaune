@@ -1,6 +1,61 @@
 import styles from "../styles/Header.module.css";
 
 export default function Header() {
+  const categories = [
+    {
+      title: "Ameublement",
+      link: "/categories/ameublement",
+    },
+    {
+      title: "Electroménager",
+      link: "/categories/electroménager",
+    },
+    {
+      title: "Photographie",
+      link: "/categories/photographie",
+    },
+    {
+      title: "Informatique",
+      link: "/categories/informatique",
+    },
+    {
+      title: "Téléphonie",
+      link: "/categories/téléphonie",
+    },
+    {
+      title: "Vélos",
+      link: "/categories/velos",
+    },
+    {
+      title: "Véhicules",
+      link: "/categories/vehicules",
+    },
+    {
+      title: "Sport",
+      link: "/categories/sport",
+    },
+    {
+      title: "Habillement",
+      link: "/categories/habillement",
+    },
+    {
+      title: "Bébé",
+      link: "/categories/bebe",
+    },
+    {
+      title: "Outillage",
+      link: "/categories/outillage",
+    },
+    {
+      title: "Services",
+      link: "/categories/services",
+    },
+    {
+      title: "Vacances",
+      link: "/categories/vacances",
+    },
+  ];
+
   return (
     <header className={styles.header}>
       <div className={styles["main-menu"]}>
@@ -47,57 +102,10 @@ export default function Header() {
         </a>
       </div>
       <nav className={styles["categories-navigation"]}>
-        <a href="" className={styles["category-navigation-link"]}>
-          Ameublement
-        </a>{" "}
-        •
-        <a href="" className={styles["category-navigation-link"]}>
-          Électroménager
-        </a>{" "}
-        •
-        <a href="" className={styles["category-navigation-link"]}>
-          Photographie
-        </a>{" "}
-        •
-        <a href="" className={styles["category-navigation-link"]}>
-          Informatique
-        </a>{" "}
-        •
-        <a href="" className={styles["category-navigation-link"]}>
-          Téléphonie{" "}
-        </a>{" "}
-        •
-        <a href="" className={styles["category-navigation-link"]}>
-          Vélos
-        </a>{" "}
-        •
-        <a href="" className={styles["category-navigation-link"]}>
-          Véhicules
-        </a>{" "}
-        •
-        <a href="" className={styles["category-navigation-link"]}>
-          Sport
-        </a>{" "}
-        •
-        <a href="" className={styles["category-navigation-link"]}>
-          Habillement
-        </a>{" "}
-        •
-        <a href="" className={styles["category-navigation-link"]}>
-          Bébé
-        </a>{" "}
-        •
-        <a href="" className={styles["category-navigation-link"]}>
-          Outillage
-        </a>{" "}
-        •
-        <a href="" className={styles["category-navigation-link"]}>
-          Services{" "}
-        </a>{" "}
-        •
-        <a href="" className={styles["category-navigation-link"]}>
-          Vacances
-        </a>
+        {categories.map(category=>
+          <a key={category.title} href={category.link} className={styles["category-navigation-link"]}>
+          {category.title}</a>
+        )}
       </nav>
     </header>
   );
