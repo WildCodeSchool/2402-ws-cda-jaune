@@ -5,9 +5,9 @@ import RecentAds from "./RecentAds";
 
 export default function Home() {
   return (
-    <body>
+    <>
       <Header />
       <RecentAds />
-    </body>
+    </>
   );
 }
