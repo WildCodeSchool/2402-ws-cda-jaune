@@ -29,9 +29,9 @@
   text-decoration: unset;
   color: inherit;
 }
-.category-navigation-link:not(:nth-last-of-type(1))::after{
-  content: "•" ;
-  margin-left:1rem;
+.category-navigation-link:not(:nth-last-of-type(1))::after {
+  content: "•";
+  margin-left: 1rem;
 }
 
 .main-search-field {

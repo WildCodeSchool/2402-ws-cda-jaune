@@ -102,10 +102,15 @@ export default function Header() {
         </a>
       </div>
       <nav className={styles["categories-navigation"]}>
-        {categories.map(category=>
-          <a key={category.title} href={category.link} className={styles["category-navigation-link"]}>
-          {category.title}</a>
-        )}
+        {categories.map((category) => (
+          <a
+            key={category.title}
+            href={category.link}
+            className={styles["category-navigation-link"]}
+          >
+            {category.title}
+          </a>
+        ))}
       </nav>
     </header>
   );
