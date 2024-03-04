@@ -23,8 +23,6 @@ h1 {
   margin: 0;
 }
 
-
-
 .ad-details-image-container {
   margin-inline-start: -24px;
   margin-inline-end: -24px;
@@ -40,8 +38,6 @@ h1 {
 }
 
 @media screen and (min-width: 720px) {
-
-
   .ad-details-image-container {
     margin-inline-start: unset;
     margin-inline-end: unset;

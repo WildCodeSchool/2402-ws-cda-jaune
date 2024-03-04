@@ -1,4 +1,4 @@
-import styles from "../styles/RecentAds.module.css"
+import styles from "../styles/RecentAds.module.css";
 import AdCard from "./AdCard";
 
 export default function RecentAds() {

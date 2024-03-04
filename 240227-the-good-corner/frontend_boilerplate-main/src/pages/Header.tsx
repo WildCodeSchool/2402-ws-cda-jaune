@@ -1,17 +1,25 @@
-import styles from "../styles/Header.module.css"
+import styles from "../styles/Header.module.css";
 
 export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles["main-menu"]}>
         <h1>
-          <a href="/" className={`${styles.button} ${styles.logo} ${styles["link-button"]}`}>
+          <a
+            href="/"
+            className={`${styles.button} ${styles.logo} ${styles["link-button"]}`}
+          >
             <span className={styles["mobile-short-label"]}>TGC</span>
-            <span className={styles["desktop-long-label"]}>THE GOOD CORNER</span>
+            <span className={styles["desktop-long-label"]}>
+              THE GOOD CORNER
+            </span>
           </a>
         </h1>
         <form className={styles["text-field-with-button"]}>
-          <input className={`${styles["text-field"]} ${styles["main-search-field"]}`} type="search" />
+          <input
+            className={`${styles["text-field"]} ${styles["main-search-field"]}`}
+            type="search"
+          />
           <button className={`${styles.button} ${styles["button-primary"]}`}>
             <svg
               aria-hidden="true"
@@ -28,9 +36,14 @@ export default function Header() {
             </svg>
           </button>
         </form>
-        <a href="/post-ad" className={`${styles.button} ${styles["link-button"]}`}>
+        <a
+          href="/post-ad"
+          className={`${styles.button} ${styles["link-button"]}`}
+        >
           <span className={styles["mobile-short-label"]}>Publier</span>
-          <span className={styles["desktop-long-label"]}>Publier une annonce</span>
+          <span className={styles["desktop-long-label"]}>
+            Publier une annonce
+          </span>
         </a>
       </div>
       <nav className={styles["categories-navigation"]}>

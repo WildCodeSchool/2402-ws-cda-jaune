@@ -1,4 +1,4 @@
-import styles from "../styles/AdCard.module.css"
+import styles from "../styles/AdCard.module.css";
 
 type Props = {
   title: string;

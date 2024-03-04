@@ -1,11 +1,11 @@
 .main-content {
-    max-width: 832px;
-    padding: 0 16px;
-    margin: 120px auto 48px;
-  }
-  
-  .recent-ads {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-  }
+  max-width: 832px;
+  padding: 0 16px;
+  margin: 120px auto 48px;
+}
+
+.recent-ads {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
