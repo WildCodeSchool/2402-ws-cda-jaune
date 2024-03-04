@@ -4,8 +4,8 @@ import AdCard from "./AdCard";
 export default function RecentAds() {
   const ads = [
     {
-      title: "/ads/table",
-      link: "Table",
+      title: "Table",
+      link: "/ads/table",
       price: 120,
       imgUrl: "/images/table.webp",
     },
