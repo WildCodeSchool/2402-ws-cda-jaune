@@ -1,3 +1,4 @@
+import styles from "../styles/RecentAds.module.css"
 import AdCard from "./AdCard";
 
 export default function RecentAds() {
@@ -40,9 +41,9 @@ export default function RecentAds() {
     },
   ];
   return (
-    <main className="main-content">
+    <main className={styles["main-content"]}>
       <h2>Annonces récentes</h2>
-      <section className="recent-ads">
+      <section className={styles["recent-ads"]}>
         {ads.map((ad) => (
           <AdCard
             imgUrl={ad.imgUrl}

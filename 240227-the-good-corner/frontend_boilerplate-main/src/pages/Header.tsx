@@ -1,16 +1,18 @@
+import styles from "../styles/Header.module.css"
+
 export default function Header() {
   return (
-    <header className="header">
-      <div className="main-menu">
+    <header className={styles.header}>
+      <div className={styles["main-menu"]}>
         <h1>
-          <a href="/" className="button logo link-button">
-            <span className="mobile-short-label">TGC</span>
-            <span className="desktop-long-label">THE GOOD CORNER</span>
+          <a href="/" className={`${styles.button} ${styles.logo} ${styles["link-button"]}`}>
+            <span className={styles["mobile-short-label"]}>TGC</span>
+            <span className={styles["desktop-long-label"]}>THE GOOD CORNER</span>
           </a>
         </h1>
-        <form className="text-field-with-button">
-          <input className="text-field main-search-field" type="search" />
-          <button className="button button-primary">
+        <form className={styles["text-field-with-button"]}>
+          <input className={`${styles["text-field"]} ${styles["main-search-field"]}`} type="search" />
+          <button className={`${styles.button} ${styles["button-primary"]}`}>
             <svg
               aria-hidden="true"
               width="16"
@@ -26,61 +28,61 @@ export default function Header() {
             </svg>
           </button>
         </form>
-        <a href="/post-ad" className="button link-button">
-          <span className="mobile-short-label">Publier</span>
-          <span className="desktop-long-label">Publier une annonce</span>
+        <a href="/post-ad" className={`${styles.button} ${styles["link-button"]}`}>
+          <span className={styles["mobile-short-label"]}>Publier</span>
+          <span className={styles["desktop-long-label"]}>Publier une annonce</span>
         </a>
       </div>
-      <nav className="categories-navigation">
-        <a href="" className="category-navigation-link">
+      <nav className={styles["categories-navigation"]}>
+        <a href="" className={styles["category-navigation-link"]}>
           Ameublement
         </a>{" "}
         •
-        <a href="" className="category-navigation-link">
+        <a href="" className={styles["category-navigation-link"]}>
           Électroménager
         </a>{" "}
         •
-        <a href="" className="category-navigation-link">
+        <a href="" className={styles["category-navigation-link"]}>
           Photographie
         </a>{" "}
         •
-        <a href="" className="category-navigation-link">
+        <a href="" className={styles["category-navigation-link"]}>
           Informatique
         </a>{" "}
         •
-        <a href="" className="category-navigation-link">
+        <a href="" className={styles["category-navigation-link"]}>
           Téléphonie{" "}
         </a>{" "}
         •
-        <a href="" className="category-navigation-link">
+        <a href="" className={styles["category-navigation-link"]}>
           Vélos
         </a>{" "}
         •
-        <a href="" className="category-navigation-link">
+        <a href="" className={styles["category-navigation-link"]}>
           Véhicules
         </a>{" "}
         •
-        <a href="" className="category-navigation-link">
+        <a href="" className={styles["category-navigation-link"]}>
           Sport
         </a>{" "}
         •
-        <a href="" className="category-navigation-link">
+        <a href="" className={styles["category-navigation-link"]}>
           Habillement
         </a>{" "}
         •
-        <a href="" className="category-navigation-link">
+        <a href="" className={styles["category-navigation-link"]}>
           Bébé
         </a>{" "}
         •
-        <a href="" className="category-navigation-link">
+        <a href="" className={styles["category-navigation-link"]}>
           Outillage
         </a>{" "}
         •
-        <a href="" className="category-navigation-link">
+        <a href="" className={styles["category-navigation-link"]}>
           Services{" "}
         </a>{" "}
         •
-        <a href="" className="category-navigation-link">
+        <a href="" className={styles["category-navigation-link"]}>
           Vacances
         </a>
       </nav>
