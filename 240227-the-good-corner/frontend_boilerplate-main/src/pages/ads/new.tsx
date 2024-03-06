@@ -23,8 +23,8 @@ export default function NewAd() {
     evt.preventDefault();
 
     const formData = new FormData(evt.target as HTMLFormElement);
-
     const formJson = Object.fromEntries(formData.entries());
+
     console.log(formJson);
   };
 
@@ -51,6 +51,33 @@ export default function NewAd() {
             </option>
           ))}
         </select>
+      </label><br />
+      <label>
+        Description
+        <br />
+        <input className={styles["text-field"]} name="description" />
+      </label><br />
+      <label>
+        Propriétaire
+        <br />
+        <input className={styles["text-field"]} name="owner" />
+      </label><br />
+      <label>
+        Image (url)
+        <br />
+        <input className={styles["text-field"]} name="imgUrl" />
+      </label>
+      <br />
+      <label>
+        Lieu
+        <br />
+        <input className={styles["text-field"]} name="location" />
+      </label>
+      <br />
+      <label>
+        Tags
+        <br />
+        <input className={styles["text-field"]} name="tags" />
       </label>
       <button className={styles.button}>Submit</button>
     </form>
