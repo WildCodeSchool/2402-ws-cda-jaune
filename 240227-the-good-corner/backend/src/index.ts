@@ -1,5 +1,5 @@
 import express from "express";
-import sqlite3 from "sqlite3";
+import cors from "cors";
 import "reflect-metadata";
 import { dataSource } from "./data/config";
 import { Ad } from "./data/entities/ad";
@@ -8,9 +8,10 @@ import { Like } from "typeorm";
 import { Tag } from "./data/entities/tag";
 
 const app = express();
-const port = 3000;
+const port = 5000;
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Woohoo, ça fonctionne !");
@@ -45,7 +46,7 @@ app.post("/ads", async (req, res) => {
   newAd.description = req.body.description;
   newAd.owner = req.body.owner;
   newAd.price = req.body.price;
-  newAd.picture = req.body.picture;
+  newAd.imgUrl = req.body.imgUrl;
   newAd.location = req.body.location;
   newAd.createdAt = req.body.createdAt;
   newAd.category = await Category.findOneBy({ title: req.body.category });
@@ -79,7 +80,7 @@ app.put("/ads/:id", async (req, res) => {
   adToReplace.description = req.body.description;
   adToReplace.owner = req.body.owner;
   adToReplace.price = req.body.price;
-  adToReplace.picture = req.body.picture;
+  adToReplace.imgUrl = req.body.imgUrl;
   adToReplace.location = req.body.location;
   adToReplace.createdAt = req.body.createdA;
   adToReplace.category = await Category.findOneBy({ title: req.body.category });

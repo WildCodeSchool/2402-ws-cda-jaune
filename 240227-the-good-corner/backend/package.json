@@ -5,12 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev src/index.ts"
+    "start": "ts-node-dev src/index.ts",
+    "migration:create": "typeorm-ts-node-commonjs migration:create",
+    "migration:generate": "typeorm-ts-node-commonjs migration:generate -d src/data/config.ts",
+    "migration:up": "typeorm-ts-node-commonjs migration:run -d src/data/config.ts",
+    "migration:down": "typeorm-ts-node-commonjs migration:revert -d src/data/config.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "reflect-metadata": "^0.2.1",
     "sqlite3": "^5.1.7",

@@ -28,7 +28,7 @@ export class Ad extends BaseEntity {
   price: number;
 
   @Column()
-  picture: string;
+  imgUrl: string;
 
   @Column()
   location: string;

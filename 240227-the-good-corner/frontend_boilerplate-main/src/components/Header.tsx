@@ -1,60 +1,28 @@
+import { useEffect, useState } from "react";
 import styles from "../styles/Header.module.css";
+import axios from "axios";
 
 export default function Header() {
-  const categories = [
-    {
-      title: "Ameublement",
-      link: "/categories/ameublement",
-    },
-    {
-      title: "Electroménager",
-      link: "/categories/electroménager",
-    },
-    {
-      title: "Photographie",
-      link: "/categories/photographie",
-    },
-    {
-      title: "Informatique",
-      link: "/categories/informatique",
-    },
-    {
-      title: "Téléphonie",
-      link: "/categories/téléphonie",
-    },
-    {
-      title: "Vélos",
-      link: "/categories/velos",
-    },
-    {
-      title: "Véhicules",
-      link: "/categories/vehicules",
-    },
-    {
-      title: "Sport",
-      link: "/categories/sport",
-    },
-    {
-      title: "Habillement",
-      link: "/categories/habillement",
-    },
-    {
-      title: "Bébé",
-      link: "/categories/bebe",
-    },
-    {
-      title: "Outillage",
-      link: "/categories/outillage",
-    },
-    {
-      title: "Services",
-      link: "/categories/services",
-    },
-    {
-      title: "Vacances",
-      link: "/categories/vacances",
-    },
-  ];
+  type Category = {
+    title: string;
+    id: number;
+  };
+
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get<Category[]>(
+          "http://localhost:5000/categories",
+        );
+        setCategories(data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   return (
     <header className={styles.header}>
@@ -105,7 +73,7 @@ export default function Header() {
         {categories.map((category) => (
           <a
             key={category.title}
-            href={category.link}
+            href={`/categories/${category.id}`}
             className={styles["category-navigation-link"]}
           >
             {category.title}

@@ -1,16 +1,24 @@
-GET http://localhost:3000
+GET http://localhost:5000
 
 ### 
 
-GET http://localhost:3000/ads
+GET http://localhost:5000/ads
 
 ###
 
-GET http://localhost:3000/ads?tag=retro%20gaming
+GET http://localhost:5000/ads?category=1
 
 ###
 
-POST http://localhost:3000/ads
+GET http://localhost:5000/ads?tag=retro%20gaming
+
+###
+
+GET http://localhost:5000/ads?tag=retro%20gaming&category=autres
+
+###
+
+POST http://localhost:5000/ads
 Content-Type: application/json
 
 {
@@ -18,7 +26,7 @@ Content-Type: application/json
     "description":      "My bike is blue, working fine. I'm selling it because I've got a new one",
     "owner": "bike.seller@gmail.com",
     "price": 100,
-    "picture": "https://images.lecho.be/view?iid=dc:113129565&context=ONLINE&ratio=16/9&width=640&u=1508242455000",
+    "imgUrl": "https://images.lecho.be/view?iid=dc:113129565&context=ONLINE&ratio=16/9&width=640&u=1508242455000",
     "location": "Paris",
     "createdAt": "2023-09-05T10:13:14.755Z",
     "category": "autres",
@@ -27,11 +35,11 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/ads/3
+DELETE http://localhost:5000/ads/3
 
 ###
 
-PUT http://localhost:3000/ads/4
+PUT http://localhost:5000/ads/4
 Content-Type: application/json
 
 {
@@ -39,7 +47,7 @@ Content-Type: application/json
     "description":      "An old console",
     "owner": "loic@gmail.com",
     "price": 100,
-    "picture":      "https://images.lecho.be/view?iid=dc:113129565&context=ONLINE&ratio=16/9&width=640&u=1508242455000",
+    "imgUrl":      "https://images.lecho.be/view?iid=dc:113129565&context=ONLINE&ratio=16/9&width=640&u=1508242455000",
     "location": "Lille",
     "createdAt": "2024-02-05T10:13:14.755Z",
     "category": "vetements",
@@ -48,7 +56,7 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/ads/4
+PATCH http://localhost:5000/ads/4
 Content-Type: application/json
 
 {
@@ -58,12 +66,12 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/categories
+GET http://localhost:5000/categories
 
 ###
 
-GET http://localhost:3000/categories?needle=tu
+GET http://localhost:5000/categories?needle=tu
 
 ###
 
-GET http://localhost:3000/tags
+GET http://localhost:5000/tags
