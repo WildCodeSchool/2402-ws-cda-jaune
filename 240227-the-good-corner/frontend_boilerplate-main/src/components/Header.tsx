@@ -24,6 +24,8 @@ export default function Header() {
     fetchCategories();
   }, []);
 
+  const hSearch=()=>{}
+
   return (
     <header className={styles.header}>
       <div className={styles["main-menu"]}>
@@ -38,10 +40,11 @@ export default function Header() {
             </span>
           </a>
         </h1>
-        <form className={styles["text-field-with-button"]}>
+        <form className={styles["text-field-with-button"]} onSubmit={hSearch}>
           <input
             className={`${styles["text-field"]} ${styles["main-search-field"]}`}
             type="search"
+            name="needle"
           />
           <button className={`${styles.button} ${styles["button-primary"]}`}>
             <svg

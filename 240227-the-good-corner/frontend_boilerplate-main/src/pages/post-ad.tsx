@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
-import styles from "../../styles/NewAd.module.css";
+import styles from "../styles/NewAd.module.css";
 import axios from "axios";
 
 type Category = {
@@ -25,6 +25,8 @@ export default function NewAd() {
     const formData = new FormData(evt.target as HTMLFormElement);
     const formJson = Object.fromEntries(formData.entries());
 
+    axios.post("http://localhost:5000/ads", formJson)
+
     console.log(formJson);
   };
 
@@ -33,7 +35,7 @@ export default function NewAd() {
       <label>
         Titre de l&apos;annonce
         <br />
-        <input className={styles["text-field"]} name="titre" />
+        <input className={styles["text-field"]} name="title" />
       </label>
       <br />
       <label>

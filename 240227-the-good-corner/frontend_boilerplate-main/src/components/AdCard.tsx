@@ -15,7 +15,7 @@ export default function AdCard({
 }: Omit<AdCardProps, "id">) {
   return (
     <div className={styles["ad-card-container"]}>
-      <a className={styles["ad-card-link"]} href={`/ads/1`}>
+      <a className={styles["ad-card-link"]} href={link}>
         <img className={styles["ad-card-image"]} src={imgUrl} />
         <div className={styles["ad-card-text"]}>
           <div className={styles["ad-card-title"]}>{title}</div>

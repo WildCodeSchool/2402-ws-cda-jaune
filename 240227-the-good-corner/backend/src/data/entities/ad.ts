@@ -1,5 +1,6 @@
 import {
   BaseEntity,
+  BeforeInsert,
   Column,
   Entity,
   JoinTable,
@@ -42,4 +43,9 @@ export class Ad extends BaseEntity {
   @ManyToMany(() => Tag, (tag) => tag.ads, { eager: true })
   @JoinTable()
   tags: Tag[];
+
+  @BeforeInsert()
+  updateCreationDate() {
+    this.createdAt=new Date();
+  }
 }

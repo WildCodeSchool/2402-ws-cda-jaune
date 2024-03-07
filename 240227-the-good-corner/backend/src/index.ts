@@ -19,25 +19,52 @@ app.get("/", (req, res) => {
 
 app.get("/ads", async (req, res) => {
   const category = req.query.category;
-  const tag = req.query.tag;
+  const needle = req.query.needle;
+
+  //const tag = req.query.tag;
+
+  // let criteria;
+  // if (category || tag)
+  //   criteria = {
+  //     where: [
+  //       {
+  //         category: {
+  //           title: category,
+  //         },
+  //         tags: {
+  //           title: Like(`%${tag}%`),
+  //         },
+  //       },
+  //     ],
+  //   };
 
   let criteria;
-  if (category || tag)
+  if(category) {
     criteria = {
-      where: [
-        {
-          category: {
-            title: category,
-          },
-          tags: {
-            title: Like(`%${tag}%`),
-          },
-        },
-      ],
-    };
+      where: {
+        category:{
+          id:category
+        }
+      }
+    }
+  }
+  if(needle) {
+    criteria = {
+      where: {
+        title:Like(`%${needle}%`)
+      }
+    }
+  }
+
 
   const ads = await Ad.find(criteria);
   res.json(ads);
+});
+
+app.get("/ads/:id", async (req, res) => {
+  const id = req.params.id;
+  const ad = await Ad.findOneBy({id: Number(id)});
+  res.json(ad);
 });
 
 app.post("/ads", async (req, res) => {
@@ -51,7 +78,7 @@ app.post("/ads", async (req, res) => {
   newAd.createdAt = req.body.createdAt;
   newAd.category = await Category.findOneBy({ title: req.body.category });
 
-  const tags: Tag[] = req.body.tags.map(async (tagCandidate) => {
+  const tags: Tag[] = req.body.tags.split(",").map(async (tagCandidate) => {
     let tag = await Tag.findOneBy({ title: tagCandidate });
     if (!tag) {
       tag = new Tag();
@@ -62,7 +89,7 @@ app.post("/ads", async (req, res) => {
   });
   newAd.tags = await Promise.all(tags);
 
-  newAd.save();
+  await newAd.save();
   res.json(newAd);
 });
 
@@ -82,7 +109,6 @@ app.put("/ads/:id", async (req, res) => {
   adToReplace.price = req.body.price;
   adToReplace.imgUrl = req.body.imgUrl;
   adToReplace.location = req.body.location;
-  adToReplace.createdAt = req.body.createdA;
   adToReplace.category = await Category.findOneBy({ title: req.body.category });
 
   const tags: Tag[] = req.body.tags.map(async (tagCandidate) => {
