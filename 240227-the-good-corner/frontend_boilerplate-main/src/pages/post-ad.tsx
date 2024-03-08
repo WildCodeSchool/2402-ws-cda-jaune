@@ -25,7 +25,7 @@ export default function NewAd() {
     const formData = new FormData(evt.target as HTMLFormElement);
     const formJson = Object.fromEntries(formData.entries());
 
-    axios.post("http://localhost:5000/ads", formJson)
+    axios.post("http://localhost:5000/ads", formJson);
 
     console.log(formJson);
   };
@@ -53,17 +53,20 @@ export default function NewAd() {
             </option>
           ))}
         </select>
-      </label><br />
+      </label>
+      <br />
       <label>
         Description
         <br />
         <input className={styles["text-field"]} name="description" />
-      </label><br />
+      </label>
+      <br />
       <label>
         Propriétaire
         <br />
         <input className={styles["text-field"]} name="owner" />
-      </label><br />
+      </label>
+      <br />
       <label>
         Image (url)
         <br />

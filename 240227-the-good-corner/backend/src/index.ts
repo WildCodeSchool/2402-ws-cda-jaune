@@ -39,23 +39,22 @@ app.get("/ads", async (req, res) => {
   //   };
 
   let criteria;
-  if(category) {
+  if (category) {
     criteria = {
       where: {
-        category:{
-          id:category
-        }
-      }
-    }
+        category: {
+          id: category,
+        },
+      },
+    };
   }
-  if(needle) {
+  if (needle) {
     criteria = {
       where: {
-        title:Like(`%${needle}%`)
-      }
-    }
+        title: Like(`%${needle}%`),
+      },
+    };
   }
-
 
   const ads = await Ad.find(criteria);
   res.json(ads);
@@ -63,7 +62,7 @@ app.get("/ads", async (req, res) => {
 
 app.get("/ads/:id", async (req, res) => {
   const id = req.params.id;
-  const ad = await Ad.findOneBy({id: Number(id)});
+  const ad = await Ad.findOneBy({ id: Number(id) });
   res.json(ad);
 });
 

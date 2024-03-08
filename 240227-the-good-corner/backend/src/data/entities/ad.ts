@@ -46,6 +46,6 @@ export class Ad extends BaseEntity {
 
   @BeforeInsert()
   updateCreationDate() {
-    this.createdAt=new Date();
+    this.createdAt = new Date();
   }
 }

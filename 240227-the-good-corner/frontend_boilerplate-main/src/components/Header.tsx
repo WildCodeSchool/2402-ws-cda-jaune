@@ -24,7 +24,7 @@ export default function Header() {
     fetchCategories();
   }, []);
 
-  const hSearch=()=>{}
+  const hSearch = () => {};
 
   return (
     <header className={styles.header}>

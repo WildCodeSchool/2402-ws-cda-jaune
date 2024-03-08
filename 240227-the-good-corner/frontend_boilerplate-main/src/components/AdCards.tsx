@@ -3,14 +3,14 @@ import AdCard, { AdCardProps } from "./AdCard";
 import styles from "../styles/AdCards.module.css";
 
 type Props = {
-    title: string;
-    ads: AdCardProps[];
+  title: string;
+  ads: AdCardProps[];
+};
+export default function AdCards({ title, ads }: Props) {
+  const [cart, setCart] = useState(0);
 
-}
-export default function AdCards({title, ads}: Props) {
- const [cart, setCart] = useState(0);
-
- return (<>
+  return (
+    <>
       <h2>{title}</h2>
       <p>Total: {cart}</p>
       <section className={styles["recent-ads"]}>
@@ -32,5 +32,6 @@ export default function AdCards({title, ads}: Props) {
           </div>
         ))}
       </section>
-    </>)
+    </>
+  );
 }

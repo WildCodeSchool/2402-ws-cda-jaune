@@ -21,7 +21,5 @@ export default function RecentAds() {
     fetchAds();
   }, []);
 
-  return (
-    <AdCards title="Annonces récentes" ads={ads} />
-  );
+  return <AdCards title="Annonces récentes" ads={ads} />;
 }
