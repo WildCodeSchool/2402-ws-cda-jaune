@@ -7,11 +7,18 @@
  */
 
 // ↓ uncomment bellow lines and add your response!
-/*
 export default function ({ ads }: { ads: Ad[] }): Ad[] {
-  return [];
+  return ads.sort(
+    (a, b) => a.price - b.price || a.title.localeCompare(b.title)
+  );
+  // Implementation plus "naïve" mais ~50x plus rapide
+  return ads.sort((a, b) => {
+    if (a.price < b.price) return -1;
+    if (a.price > b.price) return 1;
+    if (a.title < b.title) return -1;
+    return 1;
+  });
 }
-*/
 
 // used interfaces, do not touch
 export interface Ad {
