@@ -5,6 +5,6 @@ import { Recipe } from "../entities/Recipe";
 export class RecipeResolver {
   @Query((_returns) => [Recipe])
   recipes(): Promise<Recipe[]> {
-    return new Promise(() => []);
+    return Recipe.find();
   }
 }
