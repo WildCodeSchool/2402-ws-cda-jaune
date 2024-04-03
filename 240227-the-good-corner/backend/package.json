@@ -4,12 +4,14 @@
   "description": "backend for the-good-corner",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev src/index.ts",
+    "dev": "ts-node-dev ./src/index.ts",
+    "typeorm": "typeorm-ts-node-commonjs -d src/data/config.ts",
+    "migration:generate": "npm run typeorm migration:generate ./data/migrations",
+    "migration:up": "npm run typeorm migration:run",
+    "migration:down": "npm run typeorm migration:revert",
     "migration:create": "typeorm-ts-node-commonjs migration:create",
-    "migration:generate": "typeorm-ts-node-commonjs migration:generate -d src/data/config.ts",
-    "migration:up": "typeorm-ts-node-commonjs migration:run -d src/data/config.ts",
-    "migration:down": "typeorm-ts-node-commonjs migration:revert -d src/data/config.ts"
+    "fixtures:load": "ts-node-dev ./src/scripts/fixtures.ts",
+    "db:reset": "rm -rf data/* && npm run migration:generate && npm run migration:up && npm run fixtures:load"
   },
   "keywords": [],
   "author": "",
