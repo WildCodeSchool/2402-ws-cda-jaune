@@ -4,6 +4,7 @@ import { RecipeResolver } from "./resolvers/RecipeResolver";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { dataSource } from "./dataSource";
+import { IngredientResolver } from "./resolvers/IngredientResolver";
 
 const port = 5000;
 const app = express();
@@ -17,7 +18,7 @@ const startApollo = async () => {
     token?: string;
   }
   const schema = await buildSchema({
-    resolvers: [RecipeResolver],
+    resolvers: [RecipeResolver, IngredientResolver],
   });
   const apolloServer = new ApolloServer<MyContext>({ schema });
   await apolloServer.start();
