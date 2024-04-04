@@ -1,5 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import Head from "next/head";
+import { Recipe } from "../../../backend/src/entities/Recipe";
+import IngredientForm from "@/components/IngredientForm";
 
 const GET_RECIPES = gql`
   query Recipes {
@@ -29,17 +31,21 @@ export default function Home() {
       </Head>
       <h1>Recipes</h1>
       <main>
-        {data.recipes.map((recipe) => (
-          <>
+        {data.recipes.map((recipe: Recipe) => (
+          <article key={recipe.id}>
             <h2>{recipe.title}</h2>
             <ul>
-              {recipe.ingredients.map((ingredient) => (
-                <li key={ingredient.title}>{ingredient.title}</li>
-              ))}
+              {recipe.ingredients &&
+                recipe.ingredients.map((ingredient) => (
+                  <li key={ingredient.title}>{ingredient.title}</li>
+                ))}
             </ul>
-          </>
+          </article>
         ))}
       </main>
+      <aside>
+        <IngredientForm />
+      </aside>
     </>
   );
 }
