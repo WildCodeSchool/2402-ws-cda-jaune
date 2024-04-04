@@ -1,7 +1,24 @@
+import { gql, useQuery } from "@apollo/client";
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
+
+const GET_RECIPES = gql`
+  query Recipes {
+    recipes {
+      id
+      title
+      ingredients {
+        title
+      }
+    }
+  }
+`;
 
 export default function Home() {
+  const { loading, error, data } = useQuery(GET_RECIPES);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
+
   return (
     <>
       <Head>
@@ -10,7 +27,19 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <p>Edit index.tsx to get started</p>
+      <h1>Recipes</h1>
+      <main>
+        {data.recipes.map((recipe) => (
+          <>
+            <h2>{recipe.title}</h2>
+            <ul>
+              {recipe.ingredients.map((ingredient) => (
+                <li key={ingredient.title}>{ingredient.title}</li>
+              ))}
+            </ul>
+          </>
+        ))}
+      </main>
     </>
   );
 }
