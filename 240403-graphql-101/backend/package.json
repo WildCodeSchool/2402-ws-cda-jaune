@@ -16,6 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.10.2",
+    "@types/cors": "^2.8.17",
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "sqlite3": "^5.1.7",
     "type-graphql": "^2.0.0-beta.6",
