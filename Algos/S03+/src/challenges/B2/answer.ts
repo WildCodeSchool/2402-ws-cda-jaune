@@ -9,15 +9,25 @@
  */
 
 // ↓ uncomment bellow lines and add your response!
-/* 
 export default function ({
   messages,
 }: {
   messages: MessageWithImages[];
 }): string[] {
-  return []
+  return [
+    ...new Set(
+      messages
+        .sort((msg1, msg2) => {
+          if (msg1.sentAt < msg2.sentAt) return -1;
+          if (msg1.sentAt > msg2.sentAt) return 1;
+          return msg1.content.length - msg2.content.length;
+        })
+        .reduce((acc: string[], msg: MessageWithImages) => {
+          return [...acc, ...msg.images];
+        }, [])
+    ),
+  ];
 }
- */
 
 // used interfaces, do not touch
 export interface MessageWithImages {
