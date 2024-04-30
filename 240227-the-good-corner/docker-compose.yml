@@ -1,0 +1,24 @@
+services:
+  back:
+    build: ./backend
+    command: npm run dev
+    ports:
+      - 7546:5000
+    volumes:
+      - ./backend/src/:/app/src/
+
+  front:
+    build: ./frontend_boilerplate-main
+    command: npm run dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend_boilerplate-main/src/:/app/src/
+
+  db:
+    image: postgres
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./data-postgres:/var/lib/postgresql
