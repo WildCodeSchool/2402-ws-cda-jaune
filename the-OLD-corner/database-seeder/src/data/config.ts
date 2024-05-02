@@ -5,7 +5,5 @@ export const dataSource = new DataSource({
   type: "sqlite",
   database: "./data/db.sqlite",
   entities: ["src/data/entities/*.ts"],
-  synchronize: false,
-  migrations: ["data/*.ts"],
-  migrationsTableName: "migrations",
+  synchronize: true,
 });

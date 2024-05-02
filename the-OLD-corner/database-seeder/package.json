@@ -6,10 +6,6 @@
   "scripts": {
     "dev": "ts-node-dev ./src/index.ts",
     "typeorm": "typeorm-ts-node-commonjs -d src/data/config.ts",
-    "migration:generate": "npm run typeorm migration:generate ./data/migrations",
-    "migration:up": "npm run typeorm migration:run",
-    "migration:down": "npm run typeorm migration:revert",
-    "migration:create": "typeorm-ts-node-commonjs migration:create",
     "fixtures:load": "ts-node-dev ./src/scripts/fixtures.ts",
     "db:reset": "rm -rf data/* && npm run migration:generate && npm run migration:up && npm run fixtures:load"
   },

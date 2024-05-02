@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend for the-good-corner",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev ./src/index.ts",
+    "typeorm": "typeorm-ts-node-commonjs -d src/data/config.ts",
+    "fixtures:load": "ts-node-dev ./src/scripts/fixtures.ts",
+    "db:reset": "rm -rf data/* && npm run migration:generate && npm run migration:up && npm run fixtures:load"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "pg": "^8.11.5",
+    "reflect-metadata": "^0.2.1",
+    "typeorm": "^0.3.20"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "ts-node-dev": "^2.0.0"
+  }
+}
