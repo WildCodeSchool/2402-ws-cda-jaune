@@ -1,24 +1,32 @@
 services:
-  back:
-    build: ./backend
-    command: npm run dev
-    ports:
-      - 7546:5000
-    volumes:
-      - ./backend/src/:/app/src/
-
-  front:
-    build: ./frontend_boilerplate-main
-    command: npm run dev
-    ports:
-      - 3000:3000
-    volumes:
-      - ./frontend_boilerplate-main/src/:/app/src/
-
   db:
     image: postgres
     restart: always
     env_file:
       - .env
     volumes:
-      - ./data-postgres:/var/lib/postgresql
+      - ./data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  back:
+    build: ./backend
+    command: npm run dev
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend/src/:/app/src/
+    depends_on:
+      db:
+        condition: service_healthy
+
+  front:
+    build: ./frontend
+    command: npm run dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/src/:/app/src/
