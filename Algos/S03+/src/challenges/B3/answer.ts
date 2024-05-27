@@ -11,14 +11,19 @@
 
 // ↓ uncomment bellow lines and add your response!
 
-// export default function ({
-//   lastActivityDatetime,
-//   messages,
-// }: {
-//   lastActivityDatetime: string;
-//   messages: Message[];
-// }): MessageWithUnread[] {
-// }
+export default function ({
+  lastActivityDatetime,
+  messages,
+}: {
+  lastActivityDatetime: string;
+  messages: Message[];
+}): MessageWithUnread[] {
+  return messages
+    .sort((msg1, msg2) => (msg1.sentAt < msg2.sentAt ? -1 : 1))
+    .map((elt) => {
+      return { ...elt, unread: elt.sentAt > lastActivityDatetime };
+    });
+}
 
 // used interfaces, do not touch
 export interface Message {
