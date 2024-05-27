@@ -26,8 +26,8 @@ export default function ({
     return categoryWithTags;
 
     //2nde implementation (@Logan): Set, flatMap (nécessite es2019)
-    const tags = [...new Set(category.ads.flatMap((ad) => ad.tags))].sort();
-    return { ...category, tags };
+    // const tags = [...new Set(category.ads.flatMap((ad) => ad.tags))].sort();
+    // return { ...category, tags };
   });
 }
 
