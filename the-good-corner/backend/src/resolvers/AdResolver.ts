@@ -1,8 +1,7 @@
-import { Category } from "../entities/category";
-import { Ad } from "../entities/ad";
 import {
   Arg,
   Authorized,
+  Ctx,
   Field,
   ID,
   InputType,
@@ -10,7 +9,10 @@ import {
   Query,
   Resolver,
 } from "type-graphql";
-import { Tag } from "src/entities/tag";
+import { Category } from "../entities/category";
+import { Ad } from "../entities/ad";
+import { Tag } from "../entities/tag";
+import { User } from "../entities/user";
 
 @InputType()
 class NewAdInput implements Partial<Ad> {
@@ -19,9 +21,6 @@ class NewAdInput implements Partial<Ad> {
 
   @Field()
   description: string;
-
-  @Field()
-  owner: string;
 
   @Field()
   price: number;
@@ -55,8 +54,9 @@ class AdResolver {
 
   @Authorized()
   @Mutation(() => Ad)
-  async createNewAd(@Arg("data") newAdData: NewAdInput) {
-    const resultFromSave = await Ad.save({ ...newAdData });
+  async createNewAd(@Arg("data") newAdData: NewAdInput, @Ctx() ctx: any) {
+    const owner = await User.findOneByOrFail({ id: ctx.id });
+    const resultFromSave = await Ad.save({ ...newAdData, owner });
     const resultForApi = await Ad.find({
       relations: { category: true },
       where: { id: resultFromSave.id },

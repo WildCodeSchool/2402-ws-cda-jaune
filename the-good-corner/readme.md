@@ -13,8 +13,8 @@
   - renvoyer un token
 
 - proteger au moins une query/mutation
+- lier mes ads au user courant
 
 ## Todo
 
-- lier mes ads au user courant
 - ajouter une gestion fine des roles
