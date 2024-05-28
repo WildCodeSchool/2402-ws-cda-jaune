@@ -37,6 +37,7 @@ class UserResolver {
         {
           mail: user.mail,
           id: user.id,
+          roles: user.roles,
         },
         process.env.JWT_SECRET
       );
@@ -52,6 +53,7 @@ class UserResolver {
     await User.save({
       mail: userData.mail,
       hashedPassword,
+      roles: "USER",
     });
     return "I was here!";
   }

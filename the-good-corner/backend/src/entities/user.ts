@@ -26,4 +26,8 @@ export class User extends BaseEntity {
   @Field(() => [Ad])
   @OneToMany(() => Ad, (ad) => ad.owner)
   ads: Ad[];
+
+  @Field()
+  @Column()
+  roles: string; // "USER", "ADMIN", "USER,MODERATOR"
 }

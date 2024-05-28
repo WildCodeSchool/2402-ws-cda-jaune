@@ -14,8 +14,10 @@ const start = async () => {
   await dataSource.initialize();
   const schema = await buildSchema({
     resolvers: [AdResolver, CategoryResolver, TagResolver, UserResolver],
-    authChecker: ({ context }) => {
-      return !!context.mail;
+    authChecker: ({ context }, neededRoles) => {
+      return !!neededRoles.filter((roleCandidate) =>
+        context.roles.split(",").includes(roleCandidate)
+      ).length;
     },
   });
 

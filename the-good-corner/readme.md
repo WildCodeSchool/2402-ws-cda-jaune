@@ -14,7 +14,16 @@
 
 - proteger au moins une query/mutation
 - lier mes ads au user courant
+- ajouter une gestion fine des roles
 
 ## Todo
 
-- ajouter une gestion fine des roles
+- ne pas verifier le token sur login
+- typer le context backend
+
+## Further
+
+- combinaison de roles
+- role ADMIN omnipotent
+- pouvoir administrer une annonce si j'en suis le proprio
+- ajouter un enum des roles possibles

@@ -63,6 +63,14 @@ class AdResolver {
     });
     return resultForApi[0];
   }
+
+  @Authorized("MODERATOR")
+  @Mutation(() => Ad)
+  async deleteAd(@Arg("adId") adId: number) {
+    const ad = await Ad.findOneByOrFail({ id: adId });
+    ad.remove();
+    return ad;
+  }
 }
 
 export default AdResolver;
