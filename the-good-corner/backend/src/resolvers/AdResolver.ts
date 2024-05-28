@@ -2,6 +2,7 @@ import { Category } from "../entities/category";
 import { Ad } from "../entities/ad";
 import {
   Arg,
+  Authorized,
   Field,
   ID,
   InputType,
@@ -52,9 +53,9 @@ class AdResolver {
     return ad;
   }
 
+  @Authorized()
   @Mutation(() => Ad)
   async createNewAd(@Arg("data") newAdData: NewAdInput) {
-    console.log("new ad data", newAdData);
     const resultFromSave = await Ad.save({ ...newAdData });
     const resultForApi = await Ad.find({
       relations: { category: true },
