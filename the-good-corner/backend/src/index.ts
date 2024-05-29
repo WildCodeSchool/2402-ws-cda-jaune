@@ -15,8 +15,13 @@ const start = async () => {
   const schema = await buildSchema({
     resolvers: [AdResolver, CategoryResolver, TagResolver, UserResolver],
     authChecker: ({ context }, neededRoles) => {
+      if (!context.payload) return false;
+
+      const userRoles = context.payload.roles.split(",");
+      if (userRoles.includes("ADMIN")) return true;
+
       return !!neededRoles.filter((roleCandidate) =>
-        context.roles.split(",").includes(roleCandidate)
+        userRoles.includes(roleCandidate)
       ).length;
     },
   });
@@ -25,16 +30,16 @@ const start = async () => {
 
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
-    context: async ({ req }) => {
-      if (!process.env.JWT_SECRET) return {};
-      if (!req.headers.authorization) return {};
+    context: async ({ req, res }) => {
+      if (!process.env.JWT_SECRET) return { res };
+      if (!req.headers.authorization) return { res };
 
       const payload = jwt.verify(
         req.headers.authorization.split("Bearer ")[1],
         process.env.JWT_SECRET
       );
-      if (typeof payload === "string") return {};
-      return payload;
+      if (typeof payload === "string") return { res };
+      return { payload, res };
     },
   });
 

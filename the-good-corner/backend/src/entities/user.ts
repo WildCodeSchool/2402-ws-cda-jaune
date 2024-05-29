@@ -31,3 +31,12 @@ export class User extends BaseEntity {
   @Column()
   roles: string; // "USER", "ADMIN", "USER,MODERATOR"
 }
+
+export type Context = {
+  res: any;
+  payload?: {
+    mail: string;
+    id: number;
+    roles: string;
+  };
+};

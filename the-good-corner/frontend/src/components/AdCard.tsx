@@ -8,7 +8,10 @@ export type AdCardProps = {
   price: number;
   link: string;
   description?: string;
-  owner?: string;
+  owner?: {
+    id: number;
+    mail: string;
+  };
   ville?: string;
   category?: Category;
 };

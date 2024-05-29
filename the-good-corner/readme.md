@@ -15,6 +15,8 @@
 - proteger au moins une query/mutation
 - lier mes ads au user courant
 - ajouter une gestion fine des roles
+- renvoyer le token au signup
+- role ADMIN omnipotent
 
 ## Todo
 
@@ -24,6 +26,5 @@
 ## Further
 
 - combinaison de roles
-- role ADMIN omnipotent
 - pouvoir administrer une annonce si j'en suis le proprio
 - ajouter un enum des roles possibles

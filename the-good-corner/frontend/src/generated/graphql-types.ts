@@ -23,7 +23,7 @@ export type Ad = {
   description: Scalars['String']['output'];
   id: Scalars['Float']['output'];
   imgUrl: Scalars['String']['output'];
-  owner: Scalars['String']['output'];
+  owner: User;
   price: Scalars['Float']['output'];
   title: Scalars['String']['output'];
   ville: Scalars['String']['output'];
@@ -39,6 +39,9 @@ export type Category = {
 export type Mutation = {
   __typename?: 'Mutation';
   createNewAd: Ad;
+  deleteAd: Ad;
+  login: Scalars['String']['output'];
+  signup: Scalars['String']['output'];
 };
 
 
@@ -46,15 +49,34 @@ export type MutationCreateNewAdArgs = {
   data: NewAdInput;
 };
 
+
+export type MutationDeleteAdArgs = {
+  adId: Scalars['Float']['input'];
+};
+
+
+export type MutationLoginArgs = {
+  data: NewUserInput;
+};
+
+
+export type MutationSignupArgs = {
+  data: NewUserInput;
+};
+
 export type NewAdInput = {
   category: Scalars['ID']['input'];
   description: Scalars['String']['input'];
   imgUrl?: InputMaybe<Scalars['String']['input']>;
-  owner: Scalars['String']['input'];
   price: Scalars['Float']['input'];
   tags: Array<Scalars['ID']['input']>;
   title: Scalars['String']['input'];
   ville: Scalars['String']['input'];
+};
+
+export type NewUserInput = {
+  mail: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 export type Query = {
@@ -63,6 +85,7 @@ export type Query = {
   getAllAds: Array<Ad>;
   getAllCategories: Array<Category>;
   getAllTags: Array<Tag>;
+  getAllUsers: Array<User>;
 };
 
 
@@ -76,6 +99,15 @@ export type Tag = {
   name: Scalars['String']['output'];
 };
 
+export type User = {
+  __typename?: 'User';
+  ads: Array<Ad>;
+  hashedPassword: Scalars['String']['output'];
+  id: Scalars['Float']['output'];
+  mail: Scalars['String']['output'];
+  roles: Scalars['String']['output'];
+};
+
 export type GetAllCategoriesAndTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -86,7 +118,12 @@ export type GetAdByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetAdByIdQuery = { __typename?: 'Query', getAdById: { __typename?: 'Ad', id: number, title: string, description: string, owner: string, ville: string, imgUrl: string, price: number } };
+export type GetAdByIdQuery = { __typename?: 'Query', getAdById: { __typename?: 'Ad', id: number, title: string, description: string, ville: string, imgUrl: string, price: number, owner: { __typename?: 'User', id: number, mail: string } } };
+
+export type GetAllAdsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllAdsQuery = { __typename?: 'Query', getAllAds: Array<{ __typename?: 'Ad', id: number, title: string, price: number, description: string, ville: string, imgUrl: string, owner: { __typename?: 'User', id: number, mail: string } }> };
 
 
 export const GetAllCategoriesAndTagsDocument = gql`
@@ -139,7 +176,10 @@ export const GetAdByIdDocument = gql`
     id
     title
     description
-    owner
+    owner {
+      id
+      mail
+    }
     ville
     imgUrl
     price
@@ -179,3 +219,51 @@ export type GetAdByIdQueryHookResult = ReturnType<typeof useGetAdByIdQuery>;
 export type GetAdByIdLazyQueryHookResult = ReturnType<typeof useGetAdByIdLazyQuery>;
 export type GetAdByIdSuspenseQueryHookResult = ReturnType<typeof useGetAdByIdSuspenseQuery>;
 export type GetAdByIdQueryResult = Apollo.QueryResult<GetAdByIdQuery, GetAdByIdQueryVariables>;
+export const GetAllAdsDocument = gql`
+    query GetAllAds {
+  getAllAds {
+    id
+    title
+    price
+    description
+    owner {
+      id
+      mail
+    }
+    ville
+    imgUrl
+  }
+}
+    `;
+
+/**
+ * __useGetAllAdsQuery__
+ *
+ * To run a query within a React component, call `useGetAllAdsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllAdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllAdsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllAdsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllAdsQuery, GetAllAdsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllAdsQuery, GetAllAdsQueryVariables>(GetAllAdsDocument, options);
+      }
+export function useGetAllAdsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllAdsQuery, GetAllAdsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllAdsQuery, GetAllAdsQueryVariables>(GetAllAdsDocument, options);
+        }
+export function useGetAllAdsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetAllAdsQuery, GetAllAdsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetAllAdsQuery, GetAllAdsQueryVariables>(GetAllAdsDocument, options);
+        }
+export type GetAllAdsQueryHookResult = ReturnType<typeof useGetAllAdsQuery>;
+export type GetAllAdsLazyQueryHookResult = ReturnType<typeof useGetAllAdsLazyQuery>;
+export type GetAllAdsSuspenseQueryHookResult = ReturnType<typeof useGetAllAdsSuspenseQuery>;
+export type GetAllAdsQueryResult = Apollo.QueryResult<GetAllAdsQuery, GetAllAdsQueryVariables>;

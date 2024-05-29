@@ -12,7 +12,7 @@ import {
 import { Category } from "../entities/category";
 import { Ad } from "../entities/ad";
 import { Tag } from "../entities/tag";
-import { User } from "../entities/user";
+import { User, Context } from "../entities/user";
 
 @InputType()
 class NewAdInput implements Partial<Ad> {
@@ -42,7 +42,7 @@ class NewAdInput implements Partial<Ad> {
 class AdResolver {
   @Query(() => [Ad])
   async getAllAds() {
-    const ads = await Ad.find({ relations: { category: true } });
+    const ads = await Ad.find({ relations: { category: true, owner: true } });
     return ads;
   }
 
@@ -54,8 +54,8 @@ class AdResolver {
 
   @Authorized()
   @Mutation(() => Ad)
-  async createNewAd(@Arg("data") newAdData: NewAdInput, @Ctx() ctx: any) {
-    const owner = await User.findOneByOrFail({ id: ctx.id });
+  async createNewAd(@Arg("data") newAdData: NewAdInput, @Ctx() ctx: Context) {
+    const owner = await User.findOneByOrFail({ id: ctx.payload!.id });
     const resultFromSave = await Ad.save({ ...newAdData, owner });
     const resultForApi = await Ad.find({
       relations: { category: true },

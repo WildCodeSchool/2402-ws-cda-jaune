@@ -19,10 +19,30 @@ export const GET_AD_BY_ID = gql`
       id
       title
       description
-      owner
+      owner {
+        id
+        mail
+      }
       ville
       imgUrl
       price
+    }
+  }
+`;
+
+export const GET_ALL_ADS = gql`
+  query GetAllAds {
+    getAllAds {
+      id
+      title
+      price
+      description
+      owner {
+        id
+        mail
+      }
+      ville
+      imgUrl
     }
   }
 `;

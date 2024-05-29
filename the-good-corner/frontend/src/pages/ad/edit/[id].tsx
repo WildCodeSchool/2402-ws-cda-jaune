@@ -60,7 +60,11 @@ const EditAd = () => {
       <br />
       <label>
         Vendeur: <br />
-        <input defaultValue={ad?.owner} className="text-field" name="owner" />
+        <input
+          defaultValue={ad?.owner?.mail}
+          className="text-field"
+          name="owner"
+        />
       </label>
       <br />
       <label>
