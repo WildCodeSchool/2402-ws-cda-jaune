@@ -35,6 +35,7 @@ class UserResolver {
     try {
       if (!process.env.JWT_SECRET) throw new Error();
       const user = await User.findOneByOrFail({ mail: userData.mail });
+
       const isValid = await argon2.verify(
         user.hashedPassword,
         userData.password
@@ -50,7 +51,11 @@ class UserResolver {
         process.env.JWT_SECRET
       );
       context.res.setHeader("Set-Cookie", `token=${token}`);
-      return token;
+      return JSON.stringify({
+        mail: user.mail,
+        id: user.id,
+        roles: user.roles,
+      });
     } catch (err) {
       return err;
     }
@@ -75,7 +80,11 @@ class UserResolver {
       process.env.JWT_SECRET
     );
     context.res.setHeader("Set-Cookie", `token=${token}`);
-    return token;
+    return JSON.stringify({
+      mail: user.mail,
+      id: user.id,
+      roles: user.roles,
+    });
   }
 }
 

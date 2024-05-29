@@ -31,11 +31,18 @@ const start = async () => {
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
     context: async ({ req, res }) => {
+      console.log("-------------");
+      console.log(req.headers.cookie);
+      console.log("-------------");
+
       if (!process.env.JWT_SECRET) return { res };
       if (!req.headers.authorization) return { res };
 
+      if (!req.headers.cookie) return { res };
+
       const payload = jwt.verify(
-        req.headers.authorization.split("Bearer ")[1],
+        // req.headers.authorization.split("Bearer ")[1],
+        req.headers.cookie.split("token=")[1],
         process.env.JWT_SECRET
       );
       if (typeof payload === "string") return { res };
