@@ -19,24 +19,29 @@ const Login = () => {
       password: values.password,
     } as NewUserInput;
 
-    if (values["action"] === "login") {
-      await login({
-        variables: {
-          data: input,
-        },
-        onCompleted: (data) => {
-          localStorage.setItem("profile", data.login);
-        },
-      });
-    } else {
-      await signup({
-        variables: {
-          data: input,
-        },
-        onCompleted: (data) => {
-          localStorage.setItem("profile", data.signup);
-        },
-      });
+    switch (values["action"]) {
+      case "login":
+        await login({
+          variables: {
+            data: input,
+          },
+          onCompleted: (data) => {
+            localStorage.setItem("profile", data.login);
+          },
+        });
+        break;
+      case "signup":
+        await signup({
+          variables: {
+            data: input,
+          },
+          onCompleted: (data) => {
+            localStorage.setItem("profile", data.signup);
+          },
+        });
+        break;
+      default:
+        return;
     }
   };
 
