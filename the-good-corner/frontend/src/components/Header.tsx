@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "../styles/header.module.css";
 import NavBar from "./NavBar";
 import { useRouter } from "next/router";
+import UserHeader from "./UserHeader";
 
 const Header = () => {
   const router = useRouter();
@@ -46,6 +47,7 @@ const Header = () => {
             </svg>
           </button>
         </form>
+        <UserHeader />
         <Link href="/ad/new" className="button link-button">
           <span className="mobile-short-label">Publier</span>
           <span className="desktop-long-label">Publier une annonce</span>

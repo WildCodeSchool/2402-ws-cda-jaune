@@ -3,11 +3,15 @@ import {
   useSignupMutation,
   type NewUserInput,
 } from "@/generated/graphql-types";
+import { useUserStore } from "@/lib/userManager";
+import { useRouter } from "next/router";
 import { FormEvent } from "react";
 
 const Login = () => {
   const [login] = useLoginMutation();
   const [signup] = useSignupMutation();
+  const router = useRouter();
+  const recordUser = useUserStore((state) => state.login);
 
   const hSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -26,7 +30,8 @@ const Login = () => {
             data: input,
           },
           onCompleted: (data) => {
-            localStorage.setItem("profile", data.login);
+            recordUser(JSON.parse(data.login));
+            router.push("/");
           },
         });
         break;
@@ -36,7 +41,8 @@ const Login = () => {
             data: input,
           },
           onCompleted: (data) => {
-            localStorage.setItem("profile", data.signup);
+            recordUser(JSON.parse(data.signup));
+            router.push("/");
           },
         });
         break;
