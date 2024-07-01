@@ -34,7 +34,7 @@
  */
 
 // ↓ uncomment bellow lines and add your response!
-/* 
+// Tristan's solution, congrats !
 export default function ({
   openingSlots,
   isoWeekday,
@@ -42,9 +42,93 @@ export default function ({
   openingSlots: OpeningSlot[];
   isoWeekday: number;
 }): PlanningSlot[] {
-  return [];
+  const dayOpeningSlots = openingSlots.filter(
+    (slot) => slot.isoWeekday === isoWeekday
+  );
+  const fullDaySchedule: PlanningSlot[] = [];
+  for (let hour = 0; hour < 24; hour++) {
+    const fromTime = `${String(hour).padStart(2, "0")}:00`;
+    const toTime = `${String((hour + 1) % 24).padStart(2, "0")}:00`;
+    fullDaySchedule.push({
+      fromTime,
+      toTime,
+      status: "closed",
+    });
+  }
+  const response = fullDaySchedule.map((slot) => {
+    dayOpeningSlots.forEach((openingSlot) => {
+      if (
+        openingSlot.opensAt <= slot.fromTime &&
+        slot.fromTime < openingSlot.closesAt &&
+        openingSlot.opensAt < slot.toTime &&
+        slot.toTime <= openingSlot.closesAt
+      ) {
+        slot.status = "opened";
+      }
+    });
+    return slot;
+  });
+  return response;
 }
- */
+
+// export default function ({
+//   openingSlots,
+//   isoWeekday,
+// }: {
+//   openingSlots: OpeningSlot[];
+//   isoWeekday: number;
+// }): PlanningSlot[] {
+//   // On sort toutes les infos des jours qiu ne nous interessent pas
+//   const daySlots = openingSlots.filter(
+//     (slot) => slot.isoWeekday === isoWeekday
+//   );
+
+//   // On initialise les 24 creneaux en "closed"
+//   const planning: PlanningSlot[] = [];
+//   for (let hour = 0; hour < 24; hour++) {
+//     planning.push({
+//       fromTime: `${hour.toString().padStart(2, "0")}:00`,
+//       toTime: `${((hour + 1) % 24).toString().padStart(2, "0")}:00`,
+//       status: "closed",
+//     });
+//   }
+
+//   daySlots.forEach((slot) => {
+//     const [slotOpensHour, slotOpensMinute] = slot.opensAt
+//       .split(":")
+//       .map(Number);
+//     const [slotClosesHour, slotClosesMinute] = slot.closesAt
+//       .split(":")
+//       .map(Number);
+
+//     for (let hour = slotOpensHour; hour <= slotClosesHour; hour++) {
+//       // (Meh solution, pas trouvé mieux assez vite): On convertit tout en minutes pour simplifier l'algo
+//       const startHour = hour * 60;
+//       const endHour = startHour + 60;
+
+//       const startTime = slotOpensHour * 60 + slotOpensMinute;
+//       const endTime = slotClosesHour * 60 + slotClosesMinute;
+
+//       if (
+//         (startTime <= startHour && endTime >= endHour) ||
+//         (startTime <= startHour && endTime > startHour && endTime <= endHour)
+//       ) {
+//         if (planning[hour].status === "opened") {
+//           planning[hour].status = "closed";
+//         } else {
+//           const overlap =
+//             Math.min(endHour, endTime) - Math.max(startHour, startTime);
+//           if (overlap >= 60) {
+//             planning[hour].status = "opened";
+//           }
+//         }
+//       }
+//     }
+//   });
+
+//   return planning;
+// }
+
 // used interfaces, do not touch
 export interface OpeningSlot {
   isoWeekday: number;
