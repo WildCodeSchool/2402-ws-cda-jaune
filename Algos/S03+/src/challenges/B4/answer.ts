@@ -28,11 +28,35 @@
  */
 
 // ↓ uncomment bellow lines and add your response!
-/* 
 export default function ({ messages }: { messages: Message[] }): DayMessages[] {
-  return [];
+  const daysWithMessages = messages.reduce((acc, message) => {
+    const date = new Date(message.sentAt);
+    date.setUTCHours(0, 0, 0, 0);
+    const day = date.toISOString();
+
+    let dayMessages = acc.find((dm) => dm.day === day);
+    if (!dayMessages) {
+      dayMessages = { day, messages: [] };
+      acc.push(dayMessages);
+    }
+    dayMessages.messages.push(message);
+
+    return acc;
+  }, [] as DayMessages[]);
+
+  daysWithMessages.forEach((dayMessages) => {
+    dayMessages.messages.sort(
+      (a, b) => new Date(a.sentAt).getTime() - new Date(b.sentAt).getTime()
+    );
+  });
+
+  daysWithMessages.sort(
+    (a, b) => new Date(a.day).getTime() - new Date(b.day).getTime()
+  );
+
+  return daysWithMessages;
 }
- */
+
 // used interfaces, do not touch
 export interface Message {
   content: string;
