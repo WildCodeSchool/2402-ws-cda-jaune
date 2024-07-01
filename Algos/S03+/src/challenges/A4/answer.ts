@@ -49,11 +49,29 @@
  */
 
 // ↓ uncomment bellow lines and add your response!
-/* 
 export default function ({ ads }: { ads: Ad[] }): MonthAds[] {
-  return [];
+  const monthAdsMap = ads.reduce((acc, ad) => {
+    const date = new Date(ad.createdAt);
+    date.setUTCDate(1);
+    date.setUTCHours(0, 0, 0, 0);
+    const month = date.toISOString();
+
+    let monthAds = acc.find((ma) => ma.month === month);
+    if (!monthAds) {
+      monthAds = { month, ads: [] };
+      acc.push(monthAds);
+    }
+    monthAds.ads.push(ad);
+
+    return acc;
+  }, [] as MonthAds[]);
+
+  monthAdsMap.sort(
+    (a, b) => new Date(a.month).getTime() - new Date(b.month).getTime()
+  );
+
+  return monthAdsMap;
 }
- */
 
 // used interfaces, do not touch
 export interface Ad {
