@@ -31,10 +31,6 @@ const start = async () => {
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
     context: async ({ req, res }) => {
-      console.log("-------------");
-      console.log(req.headers.cookie);
-      console.log("-------------");
-
       if (!process.env.JWT_SECRET) return { res };
       if (!req.headers.authorization) return { res };
 
