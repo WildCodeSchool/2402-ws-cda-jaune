@@ -1,3 +1,3 @@
-- [Currying functions: multiply all elements in an array](ttps://www.codewars.com/kata/586909e4c66d18dd1800009b/train/javascript)
-- [Going to the cinema](ttps://www.codewars.com/kata/562f91ff6a8b77dfe900006e/train/javascript)
-- [Recursion #1 - Factorial](ttps://www.codewars.com/kata/5694cb0ec554589633000036/train/javascript)
+- [Currying functions: multiply all elements in an array](https://www.codewars.com/kata/586909e4c66d18dd1800009b/train/javascript)
+- [Going to the cinema](https://www.codewars.com/kata/562f91ff6a8b77dfe900006e/train/javascript)
+- [Recursion #1 - Factorial](https://www.codewars.com/kata/5694cb0ec554589633000036/train/javascript)
